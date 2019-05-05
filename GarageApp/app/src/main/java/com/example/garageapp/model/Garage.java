@@ -14,6 +14,7 @@ public class Garage implements Serializable {
     private int numberOfCarSpots;
     private int numberOfTruckSpots;
     private AccountBag accountBag;
+    private UserAccount currentUser;
     // payment rates used to calculate amount owed once car
     // is picked up
     private double motorcycleRate;
@@ -49,6 +50,10 @@ public class Garage implements Serializable {
                 "Trucks : " + numberOfTruckSpots +"\n" );
     }
 
+    public ParkingSpot getSpot(int spotNumber){
+        return parkingSpots.get(spotNumber);
+    }
+
     private void setSpots(int numberOfMotorCycleSpots, int numberOfCarSpots, int numberOfTruckSpots) {
         totalSpots = numberOfCarSpots + numberOfMotorCycleSpots + numberOfTruckSpots;
         this.numberOfMotorcycleSpots = numberOfMotorCycleSpots;
@@ -75,6 +80,10 @@ public class Garage implements Serializable {
 
     public int getAvailableSpots() {
         return availableSpots;
+    }
+
+    public int getTotalSpots() {
+        return totalSpots;
     }
 
     public void DisplayParkingSpots() {
@@ -106,6 +115,14 @@ public class Garage implements Serializable {
 
     public AccountBag getAccountBag() {
         return accountBag;
+    }
+
+    public UserAccount getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(UserAccount currentUser) {
+        this.currentUser = currentUser;
     }
 
     @Override

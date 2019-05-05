@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.garageapp.R;
 import com.example.garageapp.model.Garage;
@@ -34,6 +36,7 @@ public class CreateGarageActivity extends AppCompatActivity {
         }
     }
 
+
     public boolean createGarage(){
         EditText inputMotorcycleSpaceCount = (EditText)findViewById(R.id.editText2);
         EditText inputCarSpaceCount = (EditText)findViewById(R.id.editText4);
@@ -42,11 +45,11 @@ public class CreateGarageActivity extends AppCompatActivity {
         EditText inputCarRate = (EditText)findViewById(R.id.editText7);
         EditText inputTruckRate = (EditText)findViewById(R.id.editText8);
 
-        if(!inputMotorcycleSpaceCount.getText().toString().equals("") ||
-                !inputCarSpaceCount.getText().toString().equals("") ||
-                !inputTruckSpaceCount.getText().toString().equals("") ||
-                !inputMotorcycleRate.getText().toString().equals("") ||
-                !inputCarRate.getText().toString().equals("") ||
+        if(!inputMotorcycleSpaceCount.getText().toString().equals("") &&
+                !inputCarSpaceCount.getText().toString().equals("") &&
+                !inputTruckSpaceCount.getText().toString().equals("") &&
+                !inputMotorcycleRate.getText().toString().equals("") &&
+                !inputCarRate.getText().toString().equals("") &&
                 !inputTruckRate.getText().toString().equals("")){
             int numMotorcycles = Integer.valueOf(inputMotorcycleSpaceCount.getText().toString());
             int numCars = Integer.valueOf(inputCarSpaceCount.getText().toString());
