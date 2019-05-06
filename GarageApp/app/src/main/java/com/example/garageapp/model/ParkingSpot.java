@@ -54,10 +54,19 @@ public class ParkingSpot implements Serializable {
 
     @Override
     public String toString() {
-        return "ParkingSpot{" +
-                "currentV=" + currentV +
-                ", spotSize=" + spotSize +
-                ", spotNumber=" + spotNumber +
-                '}';
+        String returnString;
+        if(currentV != null){
+            returnString = "ParkingSpot: " + spotNumber + "\n" +
+                    "Current Vehicle: " + currentV.getvSize() + "\n" +
+                    "Plate Number: " +currentV.getPlateNumber() + "\n" +
+                    "Spot Size: " + spotSize;
+        } else {
+            returnString = "ParkingSpot: " + spotNumber + "\n" +
+                    "Current Vehicle: " + currentV + "\n" +
+                    "Spot Size: " + spotSize + "\n";
+        }
+
+        return returnString;
     }
+
 }

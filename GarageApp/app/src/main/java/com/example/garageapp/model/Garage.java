@@ -61,18 +61,18 @@ public class Garage implements Serializable {
         this.numberOfTruckSpots = numberOfTruckSpots;
 
         int count = 0;
-        for (int i = 0; i < numberOfMotorCycleSpots; i++) {
+        for (int i = 1; i < numberOfMotorCycleSpots+1; i++) {
             parkingSpots.add(new ParkingSpot(VehicleSize.Motorcycle, i));
             count = i;
         }
         count += 1;
-        for (int i = count; i < numberOfMotorCycleSpots + numberOfCarSpots; i++) {
+        for (int i = count; i < (numberOfMotorCycleSpots + numberOfCarSpots) + 1; i++) {
             parkingSpots.add(new ParkingSpot(VehicleSize.Car, i));
             count = i;
         }
         count += 1;
-        for (int i = count; i < numberOfMotorCycleSpots + numberOfCarSpots +
-                numberOfTruckSpots; i++) {
+        for (int i = count; i < (numberOfMotorCycleSpots + numberOfCarSpots +
+                numberOfTruckSpots) + 1; i++) {
             parkingSpots.add(new ParkingSpot(VehicleSize.Truck, i));
         }
 
@@ -110,6 +110,7 @@ public class Garage implements Serializable {
             return false;
         }
         parkingSpots.get(spotToBeParkedIn).parkVehicleInSpot(vehicle);
+        System.out.println(vehicle.getvSize() + " parked!");
         return true;
     }
 
