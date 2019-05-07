@@ -36,6 +36,20 @@ public class Demo {
 
   ////////////////////////////////////////////////////////////
 
+    Garage garage = new Garage(3,3,3);
+    Car car = new Car();
+    car.setPlateNumber("123");
+    car.setCostRate(1);
+
+    garage.parkVehicle(car);
+    garage.DisplayParkingSpots();
+
+    System.out.println("-------------");
+
+    garage.removeVehicleByPlateNumber("123");
+    System.out.println("-------------");
+
+    garage.DisplayParkingSpots();
 
     }
 }

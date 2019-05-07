@@ -114,6 +114,20 @@ public class Garage implements Serializable {
         return true;
     }
 
+    public boolean removeVehicleByPlateNumber(String plateNumber){
+        ParkingSpot spotToRemoveFrom;
+        for(int i = 0; i < totalSpots; i++){
+            if(parkingSpots.get(i).getCurrentV() != null && parkingSpots.get(i).getCurrentV().getPlateNumber().equals(plateNumber)){
+                spotToRemoveFrom = parkingSpots.get(i);
+                spotToRemoveFrom.removeVehicle();
+                System.out.println("Vehicle removed.");
+                return true;
+            }
+        }
+        System.out.println("Vehicle not found.");
+        return false;
+    }
+
     public AccountBag getAccountBag() {
         return accountBag;
     }

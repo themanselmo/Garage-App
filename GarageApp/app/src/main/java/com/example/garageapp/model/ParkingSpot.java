@@ -52,6 +52,10 @@ public class ParkingSpot implements Serializable {
         return spotNumber;
     }
 
+    public Vehicle getCurrentV() {
+        return currentV;
+    }
+
     @Override
     public String toString() {
         String returnString;

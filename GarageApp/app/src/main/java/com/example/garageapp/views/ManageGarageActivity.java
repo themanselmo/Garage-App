@@ -66,7 +66,7 @@ public class ManageGarageActivity extends AppCompatActivity {
                 .setPositiveButton("Enter", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        incomingLicensePlateNumber = text.getText().toString();
+                        incomingLicensePlateNumber = text.getText().toString().trim();
                         dialog.dismiss();
                     }
                 })
@@ -118,6 +118,39 @@ public class ManageGarageActivity extends AppCompatActivity {
     public void parkVehicle(String plateNumber, Vehicle vehicle) {
         vehicle.setPlateNumber(plateNumber);
         garage.parkVehicle(vehicle);
+        displayGarageToScrollView();
+    }
+
+    public void unParkCar(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final EditText text = new EditText(this);
+        builder.setTitle("Remove Car")
+                .setMessage("Please input the license plate of the car to be removed.")
+                .setView(text)
+                .setPositiveButton("Enter", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+//                        incomingLicensePlateNumber = text.getText().toString();
+                        System.out.println(text.getText().toString());
+                        removeVehicle(text.getText().toString().trim());
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton("Close", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+    }
+
+    public void removeVehicle(String plateNumber){
+        garage.removeVehicleByPlateNumber(plateNumber);
         displayGarageToScrollView();
     }
 }
