@@ -75,8 +75,8 @@
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="162dp"
-        android:layout_marginTop="404dp"
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="352dp"
         android:layout_marginEnd="162dp"
         android:onClick="moveToManageGarageActivity"
         android:text="Create"
@@ -135,4 +135,5 @@
         android:text="Payment Scheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

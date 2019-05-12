@@ -25,6 +25,7 @@ public class Garage implements Serializable {
                   int numberOfTruckSpots) {
        setSpots(numberOfMotorCycleSpots,numberOfCarSpots,numberOfTruckSpots);
        callOutSpots();
+       accountBag = new AccountBag();
     }
 
     public Garage(int numberOfMotorCycleSpots, int numberOfCarSpots,
@@ -126,6 +127,50 @@ public class Garage implements Serializable {
         }
         System.out.println("Vehicle not found.");
         return false;
+    }
+
+    public boolean insertAttendant(String username, String password){
+        if(accountBag.containsUsername(username) == true) {
+            return false;
+        } else {
+            accountBag.insertAttendant(username, password);
+            System.out.println("Account added with creds. : " + username + ", " + password);
+            return true;
+        }
+    }
+
+    public boolean insertAttendant(UserAttendant attendant){
+        String username = attendant.getUsername();
+        String password = attendant.getPassword();
+        if(accountBag.containsUsername(username) == true) {
+            return false;
+        } else {
+            accountBag.insertAttendant(username, password);
+            System.out.println("Account added with creds. : " + username + ", " + password);
+            return true;
+        }
+    }
+
+    public boolean insertManager(String username, String password){
+        if(accountBag.containsUsername(username) == true) {
+            return false;
+        } else {
+            accountBag.insertManager(username, password);
+            System.out.println("Account added with creds. : " + username + ", " + password);
+            return true;
+        }
+    }
+
+    public boolean insertManager(UserManager manager){
+        String username = manager.getUsername();
+        String password = manager.getPassword();
+        if(accountBag.containsUsername(username) == true) {
+            return false;
+        } else {
+            accountBag.insertManager(username, password);
+            System.out.println("Account added with creds. : " + username + ", " + password);
+            return true;
+        }
     }
 
     public AccountBag getAccountBag() {

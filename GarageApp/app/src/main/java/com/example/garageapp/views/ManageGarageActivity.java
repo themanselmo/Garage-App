@@ -9,12 +9,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.garageapp.R;
 import com.example.garageapp.model.Car;
 import com.example.garageapp.model.Garage;
 import com.example.garageapp.model.Motorcycle;
 import com.example.garageapp.model.Truck;
+import com.example.garageapp.model.UserAccount;
 import com.example.garageapp.model.Vehicle;
 
 public class ManageGarageActivity extends AppCompatActivity {
@@ -24,23 +26,32 @@ public class ManageGarageActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private String incomingLicensePlateNumber;
     private Vehicle incomingVehicle;
+    private UserAccount currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_garage);
         garage = (Garage) getIntent().getSerializableExtra("serialize_data");
+        currentUser = (UserAccount) getIntent().getSerializableExtra("currentUser");
         recyclerView = findViewById(R.id.my_recycler_view);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
+        displayCurrentUserToTextView();
         displayGarageToScrollView();
 
     }
 
     public void displayGarage(View view) {
         System.out.println(garage.toString());
+    }
+
+    public void displayCurrentUserToTextView(){
+        TextView userDisplay = (TextView)findViewById(R.id.textView10);
+        String text = "Current User: " + currentUser.getUsername() +
+                "\n" + "Account Type: " + currentUser.getAccountType();
+        userDisplay.setText(text);
     }
 
     // implement so it only shows filled parking spots

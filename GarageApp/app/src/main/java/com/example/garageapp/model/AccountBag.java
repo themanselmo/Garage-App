@@ -22,30 +22,28 @@ public class AccountBag implements Serializable {
         return null;
     }
 
-    public boolean insertAttendant(String username, String password) {
-        UserAttendant insert = new UserAttendant(username,password);
+    // returns true if username exists
+    public boolean containsUsername(String username){
         for (int i = 0; i < accounts.size(); i++) {
             if (username.equals(accounts.get(i).getUsername())) {
                 System.out.println("Username already exists");
-                return false;
+                return true;
             }
         }
-        accounts.add(insert);
-        System.out.println("Account added!");
-        return true;
+        return false;
     }
 
-    public boolean insertManager(String username, String password) {
-        UserManager insert = new UserManager(username,password);
-        for (int i = 0; i < accounts.size(); i++) {
-            if (username.equals(accounts.get(i).getUsername())) {
-                System.out.println("Username already exists");
-                return false;
-            }
-        }
+    public void insertAttendant(String username, String password) {
+        UserAttendant insert = new UserAttendant(username,password);
         accounts.add(insert);
-        System.out.println("Account added!");
-        return true;
+        System.out.println("Attendant added!");
+    }
+
+    // returns true if account is added
+    public void insertManager(String username, String password) {
+        UserManager insert = new UserManager(username,password);
+        accounts.add(insert);
+        System.out.println("Manager added!");
     }
 
     // returns true if account is deleted
@@ -67,7 +65,6 @@ public class AccountBag implements Serializable {
         }
         return toBePrinted;
     }
-
 
 
 }

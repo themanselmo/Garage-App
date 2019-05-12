@@ -7,8 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.example.garageapp.R;
 import com.example.garageapp.model.Garage;
@@ -28,7 +26,7 @@ public class CreateGarageActivity extends AppCompatActivity {
 
     public void moveToManageGarageActivity(View view){
         if(createGarage() == true) {
-            Intent intent = new Intent(this, ManageGarageActivity.class);
+            Intent intent = new Intent(this, CreateManagerActivity.class);
             intent.putExtra("serialize_data", garage);
             startActivity(intent);
         } else {

@@ -1,6 +1,8 @@
 package com.example.garageapp.model;
 
-public class UserManager extends UserAccount {
+import java.io.Serializable;
+
+public class UserManager extends UserAccount{
 
     public UserManager(String username, String password){
         this.setUsername(username);

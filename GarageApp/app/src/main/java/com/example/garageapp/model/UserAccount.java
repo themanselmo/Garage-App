@@ -2,7 +2,9 @@ package com.example.garageapp.model;
 
 import android.accounts.Account;
 
-public abstract class UserAccount {
+import java.io.Serializable;
+
+public abstract class UserAccount implements Serializable {
     private String username;
     private String password;
     private AccountType accountType;
