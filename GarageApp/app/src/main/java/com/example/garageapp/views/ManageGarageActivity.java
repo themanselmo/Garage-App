@@ -21,12 +21,12 @@ import com.example.garageapp.model.Vehicle;
 
 public class ManageGarageActivity extends AppCompatActivity {
     private Garage garage;
+    private UserAccount currentUser;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter myAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private String incomingLicensePlateNumber;
     private Vehicle incomingVehicle;
-    private UserAccount currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +40,11 @@ public class ManageGarageActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         displayCurrentUserToTextView();
         displayGarageToScrollView();
+
+    }
+
+    // saves garage to binary file
+    public void saveGarage(View view){
 
     }
 

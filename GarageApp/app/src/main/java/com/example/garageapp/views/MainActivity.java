@@ -16,6 +16,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    public void moveToManageGarage(View view){
+        Intent intent = new Intent(this, ManageGarageActivity.class);
+        startActivity(intent);
+    }
+
     public void moveToCreateGarage(View view){
         Intent intent = new Intent(this, CreateGarageActivity.class);
         startActivity(intent);
