@@ -6,6 +6,7 @@ public class ParkingSpot implements Serializable {
     private Vehicle currentV;
     private VehicleSize spotSize;
     private int spotNumber;
+    private String whoParked;
     private int distanceFromExit; // counting by spots
 
     // constructor for parkingSpot
@@ -56,11 +57,20 @@ public class ParkingSpot implements Serializable {
         return currentV;
     }
 
+    public String getWhoParked() {
+        return whoParked;
+    }
+
+    public void setWhoParked(String whoParked) {
+        this.whoParked = whoParked;
+    }
+
     @Override
     public String toString() {
         String returnString;
         if(currentV != null){
             returnString = "ParkingSpot: " + spotNumber + "\n" +
+                    "Parked By: " + whoParked + "\n" +
                     "Current Vehicle: " + currentV.getvSize() + "\n" +
                     "Plate Number: " +currentV.getPlateNumber() + "\n" +
                     "Spot Size: " + spotSize;

@@ -104,14 +104,15 @@ public class Garage implements Serializable {
         return -1;
     }
 
-    public boolean parkVehicle(Vehicle vehicle) {
+    public boolean parkVehicle(Vehicle vehicle, String whoParked) {
         int spotToBeParkedIn = findSpotNearExit(vehicle);
         if (spotToBeParkedIn == -1) {
             System.out.println("Spot not available.");
             return false;
         }
         parkingSpots.get(spotToBeParkedIn).parkVehicleInSpot(vehicle);
-        System.out.println(vehicle.getvSize() + " parked!");
+        parkingSpots.get(spotToBeParkedIn).setWhoParked(whoParked);
+        System.out.println(vehicle.getvSize() + " parked by " + whoParked);
         return true;
     }
 

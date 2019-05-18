@@ -133,7 +133,7 @@ public class ManageGarageActivity extends AppCompatActivity {
 
     public void parkVehicle(String plateNumber, Vehicle vehicle) {
         vehicle.setPlateNumber(plateNumber);
-        garage.parkVehicle(vehicle);
+        garage.parkVehicle(vehicle, currentUser.getUsername());
         displayGarageToScrollView();
     }
 
