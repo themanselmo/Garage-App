@@ -48,10 +48,10 @@ public class AccountBag implements Serializable {
 
     // returns true if account is deleted
     public boolean deleteAccount(String username) {
-        UserAccount temp;
         for (int i = 0; i < accounts.size(); i++) {
             if (accounts.get(i).getUsername().equals(username)) {
                 accounts.remove(i);
+                System.out.println("Account removed.");
                 return true;
             }
         }

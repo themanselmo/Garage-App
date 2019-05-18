@@ -1,5 +1,6 @@
 package com.example.garageapp.views;
 
+import android.accounts.Account;
 import android.content.DialogInterface;
 
 import android.support.v7.app.AlertDialog;
@@ -279,8 +280,46 @@ public class ManageGarageActivity extends AppCompatActivity {
 
     }
 
-    public void removeUser(){
+    public void removeUser(View view){
+        if(currentUser.getAccountType() == AccountType.Manager) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            final EditText text = new EditText(this);
+            builder.setTitle("Remove User")
+                    .setMessage("Please input the username of the account to be removed.")
+                    .setView(text)
+                    .setPositiveButton("Enter", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            incomingAccountUsername = text.getText().toString().trim();
+                            garage.removeUserAccount(incomingAccountUsername);
+                            dialog.dismiss();
+                        }
+                    })
+                    .setNegativeButton("Close", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Manager access required.")
+                    .setTitle("Access Denied")
+                    .setCancelable(false)
+                    .setNegativeButton("Close", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert);
 
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
     }
 }
 

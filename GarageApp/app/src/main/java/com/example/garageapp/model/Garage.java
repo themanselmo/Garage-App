@@ -174,6 +174,14 @@ public class Garage implements Serializable {
         }
     }
 
+    public void removeUserAccount(String username) {
+        if(accountBag.containsUsername(username)){
+            accountBag.deleteAccount(username);
+        } else {
+            System.out.println("Account does not exist");
+        }
+    }
+
     public AccountBag getAccountBag() {
         return accountBag;
     }

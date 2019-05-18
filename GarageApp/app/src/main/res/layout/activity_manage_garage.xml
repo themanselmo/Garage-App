@@ -13,6 +13,7 @@
         android:layout_marginStart="42dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="51dp"
+        android:onClick="removeUser"
         android:text="Remove User"
         app:layout_constraintEnd_toStartOf="@+id/my_recycler_view"
         app:layout_constraintStart_toStartOf="parent"
