@@ -7,6 +7,18 @@
     tools:context=".views.ManageGarageActivity">
 
     <Button
+        android:id="@+id/button11"
+        android:layout_width="109dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="51dp"
+        android:text="Remove User"
+        app:layout_constraintEnd_toStartOf="@+id/my_recycler_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button10" />
+
+    <Button
         android:id="@+id/button4"
         android:layout_width="108dp"
         android:layout_height="wrap_content"
@@ -39,7 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="39dp"
         android:onClick="unParkCar"
         android:text="Remove Car"
@@ -52,11 +64,12 @@
         android:layout_width="108dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="39dp"
         android:onClick="saveGarage"
         android:text="Save Garage"
         app:layout_constraintEnd_toStartOf="@+id/my_recycler_view"
+        app:layout_constraintHorizontal_bias="0.434"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button5" />
 
@@ -78,6 +91,29 @@
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="83dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="7dp"
+        android:text="Logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button10"
+        android:layout_width="109dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="51dp"
+        android:onClick="addUser"
+        android:text="Add User"
+        app:layout_constraintEnd_toStartOf="@+id/my_recycler_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button8" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -12,11 +12,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.garageapp.R;
+import com.example.garageapp.model.AccountType;
 import com.example.garageapp.model.Car;
 import com.example.garageapp.model.Garage;
 import com.example.garageapp.model.Motorcycle;
 import com.example.garageapp.model.Truck;
 import com.example.garageapp.model.UserAccount;
+import com.example.garageapp.model.UserAttendant;
+import com.example.garageapp.model.UserManager;
 import com.example.garageapp.model.Vehicle;
 
 public class ManageGarageActivity extends AppCompatActivity {
@@ -27,6 +30,9 @@ public class ManageGarageActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private String incomingLicensePlateNumber;
     private Vehicle incomingVehicle;
+    private String incomingAccountUsername;
+    private String incomingAccountPassoword;
+    private UserAccount incomingAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +46,11 @@ public class ManageGarageActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         displayCurrentUserToTextView();
         displayGarageToScrollView();
+
+    }
+
+    // log out current user, save garage and move to login window
+    public void logout(View view){
 
     }
 
@@ -95,6 +106,8 @@ public class ManageGarageActivity extends AppCompatActivity {
                 .setIcon(android.R.drawable.ic_dialog_alert);
 
         AlertDialog dialog = builder.create();
+
+
         AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
         // second pop up
         String[] vehicleTypes = {"Motorcycle", "Car", "Truck"};
@@ -168,6 +181,106 @@ public class ManageGarageActivity extends AppCompatActivity {
     public void removeVehicle(String plateNumber){
         garage.removeVehicleByPlateNumber(plateNumber);
         displayGarageToScrollView();
+    }
+
+    public void addUser(View view){
+        if(currentUser.getAccountType() == AccountType.Manager) {
+
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            final EditText text = new EditText(this);
+            builder.setTitle("Add User")
+                    .setMessage("Please input the username for the account, and select the account type.")
+                    .setView(text)
+                    .setPositiveButton("Enter", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            incomingAccountUsername = text.getText().toString().trim();
+                            dialog.dismiss();
+                        }
+                    })
+                    .setNegativeButton("Close", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert);
+            AlertDialog dialog = builder.create();
+
+            AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
+            final EditText text2 = new EditText(this);
+            builder2.setTitle("Add User")
+                    .setMessage("Please input the password for the account, then select account type.")
+                    .setView(text2)
+                    .setPositiveButton("Enter", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            incomingAccountPassoword = text2.getText().toString().trim();
+                            dialog.dismiss();
+                        }
+                    })
+                    .setNegativeButton("Close", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert);
+            AlertDialog dialog2 = builder2.create();
+
+            AlertDialog.Builder builder3 = new AlertDialog.Builder(this);
+            // second pop up
+            String[] vehicleTypes = {"Manager", "Attendant"};
+            builder3.setTitle("Enter account type:")
+                    .setSingleChoiceItems(vehicleTypes, 0, null)
+                    .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            int selectedPosition = ((AlertDialog) dialog).getListView().getCheckedItemPosition();
+                            //continue setting retrieved value from alertdialogue
+                            if (selectedPosition == 0) {
+                                garage.insertManager(new UserManager(incomingAccountUsername, incomingAccountPassoword));
+                            } else if (selectedPosition == 1) {
+                                garage.insertAttendant(new UserAttendant(incomingAccountUsername, incomingAccountPassoword));
+
+                            }
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert);
+
+            AlertDialog dialog3 = builder3.create();
+            dialog3.show();
+            dialog2.show();
+            dialog.show();
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Manager access required.")
+                    .setTitle("Access Denied")
+                    .setCancelable(false)
+                    .setNegativeButton("Close", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert);
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+
+    }
+
+    public void removeUser(){
+
     }
 }
 
