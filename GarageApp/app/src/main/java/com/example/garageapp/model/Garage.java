@@ -182,6 +182,22 @@ public class Garage implements Serializable {
         }
     }
 
+    public boolean login(String username, String password){
+        if(accountBag.containsUsername(username) == true){
+            if(accountBag.findAccount(username).getPassword().equals(password)){
+                System.out.println("Login success!!");
+                return true;
+            } else {
+                System.out.println(accountBag.findAccount(username).getPassword());
+                System.out.println("Wrong password");
+                return false;
+            }
+        } else {
+            System.out.println("Username does not exist");
+            return false;
+        }
+    }
+
     public AccountBag getAccountBag() {
         return accountBag;
     }

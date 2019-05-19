@@ -1,8 +1,10 @@
 package com.example.garageapp.views;
 
 import android.accounts.Account;
+import android.content.Context;
 import android.content.DialogInterface;
 
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +24,11 @@ import com.example.garageapp.model.UserAccount;
 import com.example.garageapp.model.UserAttendant;
 import com.example.garageapp.model.UserManager;
 import com.example.garageapp.model.Vehicle;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 public class ManageGarageActivity extends AppCompatActivity {
     private Garage garage;
@@ -52,12 +59,25 @@ public class ManageGarageActivity extends AppCompatActivity {
 
     // log out current user, save garage and move to login window
     public void logout(View view){
-
+    saveGarage(view);
+    Intent intent = new Intent(this, LoginActivity.class);
+    intent.putExtra("serialize_data", garage);
+    startActivity(intent);
     }
 
     // saves garage to binary file
     public void saveGarage(View view){
-
+        try {
+//            File file = new File("garage.dat");
+//            file.createNewFile();
+            FileOutputStream fos = openFileOutput("garage.dat", Context.MODE_PRIVATE);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(garage);
+            oos.close();
+            System.out.println("File saved!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void displayGarage(View view) {

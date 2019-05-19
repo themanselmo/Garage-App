@@ -7,11 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.garageapp.model.Garage;
 import com.example.garageapp.views.CreateGarageActivity;
 import com.example.garageapp.R;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,10 +26,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void moveToManageGarage(View view){
         try {
-            FileInputStream fis = new FileInputStream("garage.dat");
-            Intent intent = new Intent(this, ManageGarageActivity.class);
+            FileInputStream fis = openFileInput("garage.dat");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            Garage garage = (Garage) ois.readObject();
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.putExtra("serialize_data", garage);
             startActivity(intent);
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
             builder.setMessage("Garage save file not found.")
@@ -42,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
 
             AlertDialog dialog = builder.create();
             dialog.show();
+        } catch (ClassNotFoundException e) {
+
+
         }
     }
 

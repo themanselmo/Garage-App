@@ -1,6 +1,8 @@
 package com.example.garageapp.model;
 
-public abstract class Vehicle {
+import java.io.Serializable;
+
+public abstract class Vehicle implements Serializable {
     protected String plateNumber;
     protected VehicleSize vSize;
     protected double costRate;

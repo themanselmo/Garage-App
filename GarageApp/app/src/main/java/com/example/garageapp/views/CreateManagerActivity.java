@@ -42,8 +42,8 @@ public class CreateManagerActivity extends AppCompatActivity {
 
         if(!usernameText.getText().toString().equals("") &&
                 !passwordText.getText().toString().equals("")){
-            String username = usernameText.getText().toString();
-            String password = usernameText.getText().toString();
+            String username = usernameText.getText().toString().trim();
+            String password = passwordText.getText().toString().trim();
             if(garage.getAccountBag().containsUsername(username) == false){
                 UserManager newManager = new UserManager(username, password);
                 currentUser = newManager;
