@@ -21,6 +21,8 @@ public class Garage implements Serializable {
     private double carRate;
     private double truckRate;
 
+    private ParkingSpot spotLastParked;
+
     public Garage(int numberOfMotorCycleSpots, int numberOfCarSpots,
                   int numberOfTruckSpots) {
        setSpots(numberOfMotorCycleSpots,numberOfCarSpots,numberOfTruckSpots);
@@ -112,6 +114,7 @@ public class Garage implements Serializable {
         }
         parkingSpots.get(spotToBeParkedIn).parkVehicleInSpot(vehicle);
         parkingSpots.get(spotToBeParkedIn).setWhoParked(whoParked);
+        spotLastParked = parkingSpots.get(spotToBeParkedIn);
         System.out.println(vehicle.getvSize() + " parked by " + whoParked);
         return true;
     }
@@ -208,6 +211,22 @@ public class Garage implements Serializable {
 
     public void setCurrentUser(UserAccount currentUser) {
         this.currentUser = currentUser;
+    }
+
+    public ParkingSpot getSpotLastParked() {
+        return spotLastParked;
+    }
+
+    public double getMotorcycleRate() {
+        return motorcycleRate;
+    }
+
+    public double getCarRate() {
+        return carRate;
+    }
+
+    public double getTruckRate() {
+        return truckRate;
     }
 
     @Override

@@ -17,8 +17,11 @@ import android.widget.TextView;
 import com.example.garageapp.R;
 import com.example.garageapp.model.AccountType;
 import com.example.garageapp.model.Car;
+import com.example.garageapp.model.EntryTicket;
 import com.example.garageapp.model.Garage;
 import com.example.garageapp.model.Motorcycle;
+import com.example.garageapp.model.RecieptTicket;
+import com.example.garageapp.model.Ticket;
 import com.example.garageapp.model.Truck;
 import com.example.garageapp.model.UserAccount;
 import com.example.garageapp.model.UserAttendant;
@@ -29,6 +32,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.Date;
 
 public class ManageGarageActivity extends AppCompatActivity {
     private Garage garage;
@@ -142,12 +146,15 @@ public class ManageGarageActivity extends AppCompatActivity {
                         //continue setting retrieved value from alertdialogue
                         if (selectedPosition == 0) {
                             incomingVehicle = new Motorcycle();
+                            incomingVehicle.setCostRate(garage.getMotorcycleRate());
                             parkVehicle(incomingLicensePlateNumber, incomingVehicle);
                         } else if (selectedPosition == 1) {
                             incomingVehicle = new Car();
+                            incomingVehicle.setCostRate(garage.getCarRate());
                             parkVehicle(incomingLicensePlateNumber, incomingVehicle);
                         } else if (selectedPosition == 2) {
                             incomingVehicle = new Truck();
+                            incomingVehicle.setCostRate(garage.getTruckRate());
                             parkVehicle(incomingLicensePlateNumber, incomingVehicle);
                         }
                     }
@@ -166,9 +173,25 @@ public class ManageGarageActivity extends AppCompatActivity {
     }
 
     public void parkVehicle(String plateNumber, Vehicle vehicle) {
+        EntryTicket ticket = new EntryTicket();
+        Date start = new Date();
+        long startTime = start.getTime();
         vehicle.setPlateNumber(plateNumber);
         garage.parkVehicle(vehicle, currentUser.getUsername());
-        displayGarageToScrollView();
+        vehicle.setTimeParked(startTime);
+        ticket.setNameOfAttendant(currentUser.getUsername());
+        ticket.setPlateNumber(vehicle.getPlateNumber());
+        ticket.setCategoryOfSpot(garage.getSpotLastParked().getSpotSize());
+        ticket.setSpotNumber(garage.getSpotLastParked().getSpotNumber());
+        ticket.setTimeEntered(startTime);
+        ticket.setPaymentScheme(vehicle.getCostRate());
+        ticket.setDate(start);
+
+        Intent intent = new Intent(this, TicketActivity.class);
+        intent.putExtra("ticket", ticket);
+        intent.putExtra("garage", garage);
+        intent.putExtra("currentUser", currentUser);
+        startActivity(intent);
     }
 
     public void unParkCar(View view){

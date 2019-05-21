@@ -1,18 +1,34 @@
 package com.example.garageapp.model;
 
-public abstract class Ticket {
-    private String plateNumber;
-    private String categoryOfSpot;
-    private String nameOfAttendant;
-    private String paymentScheme;
-    private String date;
-    private String timeEntered;
+import java.io.Serializable;
+import java.util.Date;
 
-    public String getTimeEntered() {
+public abstract class Ticket implements Serializable {
+    private String plateNumber;
+    private int spotNumber;
+    private VehicleSize categoryOfSpot;
+    private String nameOfAttendant;
+    private double paymentScheme;
+    private Date date;
+    private long timeEntered;
+
+    public Ticket() {
+
+    }
+
+    public int getSpotNumber() {
+        return spotNumber;
+    }
+
+    public void setSpotNumber(int spotNumber) {
+        this.spotNumber = spotNumber;
+    }
+
+    public long getTimeEntered() {
         return timeEntered;
     }
 
-    public void setTimeEntered(String timeEntered) {
+    public void setTimeEntered(long timeEntered) {
         this.timeEntered = timeEntered;
     }
 
@@ -24,11 +40,11 @@ public abstract class Ticket {
         this.plateNumber = plateNumber;
     }
 
-    public String getCategoryOfSpot() {
+    public VehicleSize getCategoryOfSpot() {
         return categoryOfSpot;
     }
 
-    public void setCategoryOfSpot(String categoryOfSpot) {
+    public void setCategoryOfSpot(VehicleSize categoryOfSpot) {
         this.categoryOfSpot = categoryOfSpot;
     }
 
@@ -40,19 +56,19 @@ public abstract class Ticket {
         this.nameOfAttendant = nameOfAttendant;
     }
 
-    public String getPaymentScheme() {
+    public double getPaymentScheme() {
         return paymentScheme;
     }
 
-    public void setPaymentScheme(String paymentScheme) {
+    public void setPaymentScheme(double paymentScheme) {
         this.paymentScheme = paymentScheme;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 }
