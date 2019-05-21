@@ -223,8 +223,25 @@ public class ManageGarageActivity extends AppCompatActivity {
     }
 
     public void removeVehicle(String plateNumber){
+        Date date = new Date();
+        Vehicle vehicle = garage.findByPlateNumber(plateNumber).getCurrentV();
+        RecieptTicket ticket = new RecieptTicket();
+        ticket.setTimeExit(System.currentTimeMillis());
+        ticket.setCategoryOfSpot(garage.findByPlateNumber(plateNumber).getSpotSize());
+        ticket.setDate(date);
+        ticket.setPaymentScheme(garage.findByPlateNumber(plateNumber).getCurrentV().getCostRate());
+        ticket.setNameOfAttendant(currentUser.getUsername());
+        ticket.setSpotNumber(garage.findByPlateNumber(plateNumber).getSpotNumber());
+        ticket.setTimeEntered(garage.findByPlateNumber(plateNumber).getCurrentV().getTimeParked());
+        ticket.setPlateNumber(vehicle.getPlateNumber());
+        ticket.calculateAmountDue(ticket.getTimeEntered(),ticket.getTimeExit(),ticket.getPaymentScheme());
         garage.removeVehicleByPlateNumber(plateNumber);
-        displayGarageToScrollView();
+
+        Intent intent = new Intent(this, RecieptTicketActivity.class);
+        intent.putExtra("ticket", ticket);
+        intent.putExtra("garage", garage);
+        intent.putExtra("currentUser", currentUser);
+        startActivity(intent);
     }
 
     public void addUser(View view){

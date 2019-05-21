@@ -89,6 +89,20 @@ public class Garage implements Serializable {
         return totalSpots;
     }
 
+    public ParkingSpot findByPlateNumber(String plateNumber){
+        ParkingSpot spot;
+        for(int i = 0; i < totalSpots; i++){
+            if(parkingSpots.get(i).getCurrentV() != null && parkingSpots.get(i).getCurrentV().getPlateNumber().equals(plateNumber)){
+                spot = parkingSpots.get(i);
+
+                System.out.println("Vehicle found.");
+                return spot;
+            }
+        }
+        System.out.println("Vehicle not found.");
+        return null;
+    }
+
     public void DisplayParkingSpots() {
         for (int i = 0; i < totalSpots; i++) {
             System.out.print(parkingSpots.get(i).toString() + "\n");

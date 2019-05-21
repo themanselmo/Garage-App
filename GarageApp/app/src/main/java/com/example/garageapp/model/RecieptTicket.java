@@ -2,20 +2,41 @@ package com.example.garageapp.model;
 
 public class RecieptTicket extends Ticket {
     private double amountCharged;
-    private String timeExit;
+    private long timeExit;
     // implement values for tax, total, grand total
 
 
-    public RecieptTicket(String timeEntered, String timeExit, String paymentScheme) {
-        calculateAmountDue(timeEntered, timeExit, paymentScheme);
+    public RecieptTicket() {
+
     }
 
     // change time var to a time objecr
-    public double calculateAmountDue(String timeEntered, String timeExit,
-                                     String paymentScheme){
-
-
-        return 0.0;
+    public void calculateAmountDue(long timeEntered, long timeExit,
+                                     double paymentScheme){
+        double total;
+        long elapsedTime = timeExit - timeEntered;
+        int hoursPassed = (int) ((elapsedTime / (1000*60*60)) % 24);
+        if(hoursPassed < 1) {
+            total = paymentScheme;
+        } else {
+            total = hoursPassed * paymentScheme;
+        }
+        setAmountCharged(total);
     }
 
+    public double getAmountCharged() {
+        return amountCharged;
+    }
+
+    public void setAmountCharged(double amountCharged) {
+        this.amountCharged = amountCharged;
+    }
+
+    public long getTimeExit() {
+        return timeExit;
+    }
+
+    public void setTimeExit(long timeExit) {
+        this.timeExit = timeExit;
+    }
 }
